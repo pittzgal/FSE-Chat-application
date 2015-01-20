@@ -6,12 +6,13 @@
     <script>
         var name;
        var socket = io.connect("http://localhost:3000");
-       
+	socket.on('left',function(name1){
+	$("#msgBox").append("<strong style=align:center>"+ name1 + "</strong>"+ "- just disconnected");
+	});       
         $(function () {
-            
-            name = window.prompt("enter your name");
+         name = window.prompt("enter your name");
              $("#send").click(function () {
-var d = new Date();
+		var d = new Date();
 		var second=d.getSeconds();
 		var minute = d.getMinutes();
 		var hour = d.getHours();
@@ -26,31 +27,23 @@ var d = new Date();
                 });
             });
 		socket.on("serverMsg", function (data) {
-                //Append the message from the server to the message box
+                
                 $("#msgBox").append("<strong>" + data.name + "</strong>: " + data.msg + "                                                     "+ data.postedAt + "<br>");
-            });
-
-            
-
-            
+            });          
         });
     </script>
 <h1 align="center"> Chat Application </h1>
 </head>
 <body bgcolor="#E6E6FA">        
     <div id="msgBox" style="height: 400px; width: 1200px; border:5px solid black;">
-
     </div>
-    
     <br><br>
    <label for="message" > Enter your Message :</label> <br> <br>
     <input type="text" id="msg" style="height:30px;width:1200px" />
-    <!--Send: A button to send the message to others-->
     <input type="submit" id="send" value="send" />
+    <input type="
     <br/>
-    
-    <div id="status"></div>
-</body>
+ </body>
 
 </html>
             
